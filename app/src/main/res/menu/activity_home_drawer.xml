@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home_icon"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/nav_message"
+            android:icon="@drawable/ic_menu_message"
+            android:title="@string/message" />
+
+        <item
+            android:id="@+id/nav_event"
+            android:icon="@drawable/ic_event_bw"
+            android:title="@string/event" />
+        <item
+            android:id="@+id/nav_take_attendance"
+            android:icon="@drawable/ic_menu_attendance"
+            android:title="@string/takeAttendance" />
+        <item
+            android:id="@+id/nav_calender"
+            android:icon="@drawable/ic_menu_calendar"
+            android:title="@string/academicCalendar" />
+        <item
+            android:id="@+id/nav_subject"
+            android:icon="@drawable/ic_menu_book"
+            android:title="@string/subject" />
+        <item
+            android:id="@+id/nav_attendance"
+            android:icon="@drawable/ic_menu_attendance"
+            android:title="@string/attendance" />
+        <item
+            android:id="@+id/nav_home_work"
+            android:icon="@drawable/ic_menu_homework"
+            android:title="@string/assignment" />
+        <item
+            android:id="@+id/nav_colleague"
+            android:icon="@drawable/ic_menu_winner"
+            android:title="@string/colleagues" />
+        <item
+            android:id="@+id/nav_my_schedule"
+            android:icon="@drawable/ic_menu_winner"
+            android:title="@string/mySchedule" />
+        <!--
+        <item
+            android:id="@+id/nav_competition_winner"
+            android:icon="@drawable/ic_menu_winner"
+            android:title="@string/competition" />
+
+        <item
+            android:id="@+id/nav_achievement"
+            android:icon="@drawable/ic_menu_special"
+            android:title="@string/achievement" />
+
+        <item
+            android:id="@+id/nav_student_fees"
+            android:icon="@drawable/ic_menu_rupee"
+            android:title="@string/studentFees" />
+        -->
+        <item
+            android:id="@+id/nav_holiday"
+            android:icon="@drawable/ic_holiday"
+            android:title="@string/holiday"/>
+
+        <item
+            android:id="@+id/nav_timetable"
+            android:icon="@drawable/ic_menu_schedule"
+            android:title="@string/timeTable"/>
+
+        <item
+            android:id="@+id/nav_exam_schedule"
+            android:icon="@drawable/ic_menu_exam"
+            android:title="@string/examSchedule"/>
+        <item
+            android:id="@+id/nav_score_card"
+            android:icon="@drawable/ic_menu_score_card"
+            android:title="@string/scoreCard"/>
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_aboutus"
+                android:icon="@drawable/ic_menu_institute"
+                android:title="@string/aboutUs" />
+            <item
+                android:id="@+id/nav_appinfo"
+                android:icon="@drawable/ic_about"
+                android:title="@string/appinfo" />
+            <item
+                android:id="@+id/nav_support"
+                android:icon="@drawable/ic_support_large"
+                android:title="@string/support" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="@string/logout" />
+
+        </menu>
+    </item>
+
+</menu>

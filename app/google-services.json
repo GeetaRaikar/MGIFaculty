@@ -1,0 +1,114 @@
+{
+  "project_info": {
+    "project_number": "538760622600",
+    "firebase_url": "https://mgieduapp.firebaseio.com",
+    "project_id": "mgieduapp",
+    "storage_bucket": "mgieduapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538760622600:android:eb76137ba413f5c84f57bd",
+        "android_client_info": {
+          "package_name": "com.padmajeet.mgi.techforedu.faculty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "538760622600-9prpogqds13ji9q1cfa9uk40afkblv2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW13kI1-Ae0ySgxSlMuqIw7jW9F5afVes"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "538760622600-9prpogqds13ji9q1cfa9uk40afkblv2t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538760622600:android:de90dfae0603b4944f57bd",
+        "android_client_info": {
+          "package_name": "com.padmajeet.mgi.techforedu.parent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "538760622600-4dvjeolf676eficvbr1c65vndfjhrmtb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.padmajeet.mgi.techforedu.parent",
+            "certificate_hash": "6d08c6a79023064fa863fcc7b2b41ad4ec9c911b"
+          }
+        },
+        {
+          "client_id": "538760622600-9prpogqds13ji9q1cfa9uk40afkblv2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW13kI1-Ae0ySgxSlMuqIw7jW9F5afVes"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "538760622600-9prpogqds13ji9q1cfa9uk40afkblv2t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538760622600:android:ae29c6b33bcd67234f57bd",
+        "android_client_info": {
+          "package_name": "com.padmajeet.mgi.techforedu.student"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "538760622600-jq6k3k7v1mnhs1o9qarkmn39qj3b0jhh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.padmajeet.mgi.techforedu.student",
+            "certificate_hash": "6d08c6a79023064fa863fcc7b2b41ad4ec9c911b"
+          }
+        },
+        {
+          "client_id": "538760622600-9prpogqds13ji9q1cfa9uk40afkblv2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW13kI1-Ae0ySgxSlMuqIw7jW9F5afVes"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "538760622600-9prpogqds13ji9q1cfa9uk40afkblv2t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

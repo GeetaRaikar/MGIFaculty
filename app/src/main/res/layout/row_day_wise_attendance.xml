@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:drawableTop="@drawable/ic_attendance_small"
+                android:layout_gravity="center"
+                android:text="@string/date_cap" />
+
+            <Button
+                android:id="@+id/session1"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="20dp"
+                android:textColor="@color/colorWhite"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/session2"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="1"
+                android:minHeight="20dp"
+                android:textColor="@color/colorWhite"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/session3"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="1"
+                android:minHeight="20dp"
+                android:textColor="@color/colorWhite"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/session4"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="1"
+                android:minHeight="20dp"
+                android:textColor="@color/colorWhite"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/session5"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="1"
+                android:minHeight="20dp"
+                android:textColor="@color/colorWhite"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/session6"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="1"
+                android:minHeight="20dp"
+                android:textColor="@color/colorWhite"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/session7"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="1"
+                android:textColor="@color/colorWhite"
+                android:minHeight="20dp"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
