@@ -193,43 +193,48 @@ public class FragmentExamSeriesScore extends Fragment {
                             }
                         });
             }
+        }else{
+            spBatch.setVisibility(View.GONE);
+            rvExamSeriesScore.setVisibility(View.GONE);
+            llNoList.setVisibility(View.VISIBLE);
         }
     }
     private void getSubject() {
-        if (pDialog != null && !pDialog.isShowing()) {
-            pDialog.show();
+        if(selectedBatch != null) {
+            if (pDialog != null && !pDialog.isShowing()) {
+                pDialog.show();
+            }
+            subjectListener = subjectCollectionRef
+                    .whereEqualTo("batchId", selectedBatch.getId())
+                    .orderBy("createdDate", Query.Direction.ASCENDING)
+                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                            if (e != null) {
+                                return;
+                            }
+                            if (subjectList.size() != 0) {
+                                subjectList.clear();
+                            }
+                            for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
+                                // Log.d(TAG, document.getId()document.getId() + " => " + document.getData());
+                                Subject subject = documentSnapshot.toObject(Subject.class);
+                                subject.setId(documentSnapshot.getId());
+                                subjectList.add(subject);
+                            }
+                            if (pDialog != null) {
+                                pDialog.dismiss();
+                            }
+                            if (subjectList.size() != 0) {
+                                getExamSeriesOfBatch();
+                            } else {
+                            }
+                        }
+                    });
         }
-        subjectListener = subjectCollectionRef
-                .whereEqualTo("batchId", selectedBatch.getId())
-                .orderBy("createdDate", Query.Direction.ASCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            return;
-                        }
-                        if (subjectList.size() != 0) {
-                            subjectList.clear();
-                        }
-                        for (DocumentSnapshot documentSnapshot:queryDocumentSnapshots.getDocuments()){
-                            // Log.d(TAG, document.getId()document.getId() + " => " + document.getData());
-                            Subject subject = documentSnapshot.toObject(Subject.class);
-                            subject.setId(documentSnapshot.getId());
-                            subjectList.add(subject);
-                        }
-                        if (pDialog != null) {
-                            pDialog.dismiss();
-                        }
-                        if (subjectList.size() != 0) {
-                            getExamSeriesOfBatch();
-                        } else {
-                        }
-                    }
-                });
-        // [END get_all_users]
     }
     private void getExamSeriesOfBatch() {
-        if(academicYearId != null) {
+        if(academicYearId != null && selectedBatch != null) {
             examSeriesListener = examSeriesCollectionRef
                     .whereEqualTo("academicYearId", academicYearId)
                     .whereEqualTo("batchId", selectedBatch.getId())
@@ -260,45 +265,47 @@ public class FragmentExamSeriesScore extends Fragment {
         }
     }
     public void getAllExamOfExamSeriesOfBatch(){
-        examCollectionRef
-                .whereEqualTo("batchId", selectedBatch.getId())
-                .orderBy("date", Query.Direction.ASCENDING)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if(examList.size()>0) {
-                            examList.clear();
-                        }
-                        for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
-                            Exam exam = document.toObject(Exam.class);
-                            exam.setId(document.getId());
-                            examList.add(exam);
-                        }
-                        if(examList.size() > 0){
-                            for(Exam ex:examList) {
-                                for (Subject sub : subjectList) {
-                                    if(ex.getSubjectId().equals(sub.getId())){
-                                        ex.setSubjectId(sub.getName());
-                                        break;
+        if(selectedBatch != null) {
+            examCollectionRef
+                    .whereEqualTo("batchId", selectedBatch.getId())
+                    .orderBy("date", Query.Direction.ASCENDING)
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            if (examList.size() > 0) {
+                                examList.clear();
+                            }
+                            for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                                Exam exam = document.toObject(Exam.class);
+                                exam.setId(document.getId());
+                                examList.add(exam);
+                            }
+                            if (examList.size() > 0) {
+                                for (Exam ex : examList) {
+                                    for (Subject sub : subjectList) {
+                                        if (ex.getSubjectId().equals(sub.getId())) {
+                                            ex.setSubjectId(sub.getName());
+                                            break;
+                                        }
                                     }
                                 }
+                                examSeriesAdapter = new ExamSeriesAdapter(examSeriesList);
+                                rvExamSeriesScore.setAdapter(examSeriesAdapter);
+                                rvExamSeriesScore.setVisibility(View.VISIBLE);
+                                llNoList.setVisibility(View.GONE);
+                            } else {
+                                rvExamSeriesScore.setVisibility(View.GONE);
+                                llNoList.setVisibility(View.VISIBLE);
                             }
-                            examSeriesAdapter = new ExamSeriesAdapter(examSeriesList);
-                            rvExamSeriesScore.setAdapter(examSeriesAdapter);
-                            rvExamSeriesScore.setVisibility(View.VISIBLE);
-                            llNoList.setVisibility(View.GONE);
-                        }else {
-                            rvExamSeriesScore.setVisibility(View.GONE);
-                            llNoList.setVisibility(View.VISIBLE);
                         }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                    }
-                });
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                        }
+                    });
+        }
     }
     class ExamSeriesAdapter extends RecyclerView.Adapter<ExamSeriesAdapter.MyViewHolder> {
         private List<ExamSeries> examSeriesList;
@@ -332,11 +339,13 @@ public class FragmentExamSeriesScore extends Fragment {
         public void onBindViewHolder(MyViewHolder holder, final int position) {
             final ExamSeries examSeries = examSeriesList.get(position);
             holder.tvESName.setText(""+examSeries.getName());
-            String date=Utility.formatDateToString(examSeries.getFromDate().getTime());
-            if(examSeries.getToDate() != null){
-                date = date + " to " +Utility.formatDateToString(examSeries.getToDate().getTime());
+            if(examSeries.getFromDate() != null) {
+                String date = Utility.formatDateToString(examSeries.getFromDate().getTime());
+                if (examSeries.getToDate() != null) {
+                    date = date + " to " + Utility.formatDateToString(examSeries.getToDate().getTime());
+                }
+                holder.tvESDate.setText("" + date);
             }
-            holder.tvESDate.setText(""+date);
             /*
             if(examSeries.getToDate().getTime() > new Date().getTime()){
                 holder.tvStatus.setVisibility(View.GONE);

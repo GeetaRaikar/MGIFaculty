@@ -60,7 +60,12 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorBlack"
                     android:textSize="15sp"/>
-
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="14sp"/>
                 <TextView
                     android:id="@+id/tvDate"
                     android:layout_width="match_parent"

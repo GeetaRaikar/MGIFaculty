@@ -189,46 +189,51 @@ public class FragmentSubject extends Fragment {
                             }
                         });
             }
+        }else{
+            spBatch.setVisibility(View.GONE);
+            rvSubject.setVisibility(View.GONE);
+            llNoList.setVisibility(View.VISIBLE);
         }
     }
 
     private void getSubject() {
-        if (pDialog != null && !pDialog.isShowing()) {
-            pDialog.show();
+        if(selectedBatch != null) {
+            if (pDialog != null && !pDialog.isShowing()) {
+                pDialog.show();
+            }
+            subjectListener = subjectCollectionRef
+                    .whereEqualTo("batchId", selectedBatch.getId())
+                    .orderBy("createdDate", Query.Direction.ASCENDING)
+                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                            if (e != null) {
+                                return;
+                            }
+                            if (subjectList.size() != 0) {
+                                subjectList.clear();
+                            }
+                            for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
+                                // Log.d(TAG, document.getId()document.getId() + " => " + document.getData());
+                                subject = documentSnapshot.toObject(Subject.class);
+                                subject.setId(documentSnapshot.getId());
+                                subjectList.add(subject);
+                            }
+                            if (pDialog != null) {
+                                pDialog.dismiss();
+                            }
+                            if (subjectList.size() != 0) {
+                                subjectAdapter = new SubjectAdapter(subjectList);
+                                rvSubject.setAdapter(subjectAdapter);
+                                rvSubject.setVisibility(View.VISIBLE);
+                                llNoList.setVisibility(View.GONE);
+                            } else {
+                                rvSubject.setVisibility(View.GONE);
+                                llNoList.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    });
         }
-        subjectListener = subjectCollectionRef
-                .whereEqualTo("batchId", selectedBatch.getId())
-                .orderBy("createdDate", Query.Direction.ASCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            return;
-                        }
-                        if (subjectList.size() != 0) {
-                            subjectList.clear();
-                        }
-                        for (DocumentSnapshot documentSnapshot:queryDocumentSnapshots.getDocuments()){
-                            // Log.d(TAG, document.getId()document.getId() + " => " + document.getData());
-                            subject = documentSnapshot.toObject(Subject.class);
-                            subject.setId(documentSnapshot.getId());
-                            subjectList.add(subject);
-                        }
-                        if (pDialog != null) {
-                            pDialog.dismiss();
-                        }
-                        if (subjectList.size() != 0) {
-                            subjectAdapter = new SubjectAdapter(subjectList);
-                            rvSubject.setAdapter(subjectAdapter);
-                            rvSubject.setVisibility(View.VISIBLE);
-                            llNoList.setVisibility(View.GONE);
-                        } else {
-                            rvSubject.setVisibility(View.GONE);
-                            llNoList.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
-        // [END get_all_users]
     }
 
     class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.MyViewHolder> {

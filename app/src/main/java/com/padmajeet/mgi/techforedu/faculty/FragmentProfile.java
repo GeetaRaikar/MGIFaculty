@@ -39,10 +39,10 @@ public class FragmentProfile extends Fragment {
 
     private View view;
     private Staff loggedInUser;
-    private EditText etMobileNumber, etEmail, etAddress,etFirstName,etLastName;
+    private EditText etMobileNumber, etEmail, etAddress;
     private ImageView ivProfilePic;
     private Button btUpdateProfile;
-    private boolean isEmailEdited, isFirstNameEdited, isLastNameEdited, isAddressEdited;
+    private boolean isEmailEdited, isAddressEdited;
     private Fragment currentFragment;
     private Gson gson;
     private String loggedInUserId;
@@ -75,16 +75,12 @@ public class FragmentProfile extends Fragment {
 
         currentFragment = this;
         isEmailEdited = false;
-        isFirstNameEdited = false;
-        isLastNameEdited = false;
         isAddressEdited = false;
         btUpdateProfile = view.findViewById(R.id.btUpdateProfile);
         btUpdateProfile.setVisibility(View.INVISIBLE);
         ivProfilePic = view.findViewById(R.id.ivProfilePic);
         tvStaffName = view.findViewById(R.id.tvStaffName);
         etMobileNumber = view.findViewById(R.id.etMobileNumber);
-        etFirstName = view.findViewById(R.id.etFirstName);
-        etLastName = view.findViewById(R.id.etLastName);
         etEmail = view.findViewById(R.id.etEmail);
         etAddress = view.findViewById(R.id.etAddress);
 
@@ -103,20 +99,6 @@ public class FragmentProfile extends Fragment {
 
             etMobileNumber.setText(loggedInUser.getMobileNumber());
 
-            if (TextUtils.isEmpty(loggedInUser.getFirstName())) {
-                String firstNameUnavailable = getString(R.string.unavailable);
-                etFirstName.setHint(firstNameUnavailable);
-            } else {
-                etFirstName.setText(loggedInUser.getFirstName());
-            }
-
-            if (TextUtils.isEmpty(loggedInUser.getLastName())) {
-                String lastNameUnavailable = getString(R.string.unavailable);
-                etLastName.setHint(lastNameUnavailable);
-            } else {
-                etLastName.setText(loggedInUser.getLastName());
-            }
-
             if (TextUtils.isEmpty(loggedInUser.getEmailId())) {
                 String emailIdUnavailable = getString(R.string.unavailable);
                 etEmail.setHint(emailIdUnavailable);
@@ -129,28 +111,6 @@ public class FragmentProfile extends Fragment {
             }
 
         }
-
-        ImageView ivEditFirstName = view.findViewById(R.id.ivEditFirstName);
-        ivEditFirstName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isFirstNameEdited = true;
-                btUpdateProfile.setVisibility(View.VISIBLE);
-                etFirstName.setEnabled(true);
-                etFirstName.requestFocus();
-            }
-        });
-
-        ImageView ivEditLastName = view.findViewById(R.id.ivEditLastName);
-        ivEditLastName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isLastNameEdited = true;
-                btUpdateProfile.setVisibility(View.VISIBLE);
-                etLastName.setEnabled(true);
-                etLastName.requestFocus();
-            }
-        });
 
         ImageView ivEditEmail = view.findViewById(R.id.ivEditEmail);
         ivEditEmail.setOnClickListener(new View.OnClickListener() {
@@ -215,24 +175,6 @@ public class FragmentProfile extends Fragment {
 
     void updateUserProfile() {
         boolean canSave = true;
-        if (isFirstNameEdited) {
-            String updatedFirstName = etFirstName.getText().toString().trim();
-            if (TextUtils.isEmpty(updatedFirstName)) {
-                etFirstName.setError(getString(R.string.errInvalidFirstName));
-                canSave = false;
-            } else {
-                loggedInUser.setFirstName(updatedFirstName);
-            }
-        }
-        if (isLastNameEdited) {
-            String updatedLastName = etLastName.getText().toString().trim();
-            if (TextUtils.isEmpty(updatedLastName)) {
-                etLastName.setError(getString(R.string.errInvalidLastName));
-                canSave = false;
-            } else {
-                loggedInUser.setLastName(updatedLastName);
-            }
-        }
         if (isEmailEdited) {
             String updatedEmail = etEmail.getText().toString().trim();
             if (!Utility.isEmailValid(updatedEmail)) {

@@ -222,6 +222,9 @@ public class FragmentHomeWork extends Fragment {
                 bottomSheetDialog.show();
             }
         });
+        if(batchIdList.size() == 0){
+            fab.hide();
+        }
         return view;
     }
 
@@ -323,6 +326,10 @@ public class FragmentHomeWork extends Fragment {
                             }
                         });
             }
+        }else{
+            spBatch.setVisibility(View.GONE);
+            rvHomeWork.setVisibility(View.GONE);
+            llNoList.setVisibility(View.VISIBLE);
         }
     }
     /*
@@ -349,54 +356,55 @@ public class FragmentHomeWork extends Fragment {
     }
     */
     private void getHomeWork() {
-        if (homeWorkList.size() != 0) {
-            homeWorkList.clear();
-        }
-        if (!pDialog.isShowing()) {
-            pDialog.show();
-        }
-        homeWorkListener=homeWorkCollectionRef
-                .whereEqualTo("batchId", selectedBatch.getId())
-                //.whereEqualTo("sectionId", selectedSection.getId())
-                .orderBy("createdDate", Query.Direction.DESCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            return;
-                        }
-                        if (homeWorkList.size() != 0) {
-                            homeWorkList.clear();
-                        }
-                        if (pDialog != null) {
-                            pDialog.dismiss();
-                        }
-                        for (DocumentSnapshot document:queryDocumentSnapshots.getDocuments()) {
-                            homeWork = document.toObject(HomeWork.class);
-                            homeWork.setId(document.getId());
-                            homeWorkList.add(homeWork);
-                        }
-                        if (homeWorkList.size() != 0) {
+        if(selectedBatch != null) {
+            if (homeWorkList.size() != 0) {
+                homeWorkList.clear();
+            }
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+            homeWorkListener = homeWorkCollectionRef
+                    .whereEqualTo("batchId", selectedBatch.getId())
+                    //.whereEqualTo("sectionId", selectedSection.getId())
+                    .orderBy("createdDate", Query.Direction.DESCENDING)
+                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                            if (e != null) {
+                                return;
+                            }
+                            if (homeWorkList.size() != 0) {
+                                homeWorkList.clear();
+                            }
                             if (pDialog != null) {
                                 pDialog.dismiss();
                             }
-                            for(HomeWork s:homeWorkList) {
-                                System.out.println("homeWorkList " + s.getName());
+                            for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                                homeWork = document.toObject(HomeWork.class);
+                                homeWork.setId(document.getId());
+                                homeWorkList.add(homeWork);
                             }
-                            rvHomeWork.setVisibility(View.VISIBLE);
-                            llNoList.setVisibility(View.GONE);
-                            homeWorkAdapter = new HomeWorkAdapter(homeWorkList);
-                            rvHomeWork.setAdapter(homeWorkAdapter);
-                        } else {
-                            if (pDialog != null) {
-                                pDialog.dismiss();
+                            if (homeWorkList.size() != 0) {
+                                if (pDialog != null) {
+                                    pDialog.dismiss();
+                                }
+                                for (HomeWork s : homeWorkList) {
+                                    System.out.println("homeWorkList " + s.getName());
+                                }
+                                rvHomeWork.setVisibility(View.VISIBLE);
+                                llNoList.setVisibility(View.GONE);
+                                homeWorkAdapter = new HomeWorkAdapter(homeWorkList);
+                                rvHomeWork.setAdapter(homeWorkAdapter);
+                            } else {
+                                if (pDialog != null) {
+                                    pDialog.dismiss();
+                                }
+                                rvHomeWork.setVisibility(View.GONE);
+                                llNoList.setVisibility(View.VISIBLE);
                             }
-                            rvHomeWork.setVisibility(View.GONE);
-                            llNoList.setVisibility(View.VISIBLE);
                         }
-                    }
-                });
-        // [END get_all_users]
+                    });
+        }
     }
     class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.MyViewHolder> {
         private List<HomeWork> homeWorkList;

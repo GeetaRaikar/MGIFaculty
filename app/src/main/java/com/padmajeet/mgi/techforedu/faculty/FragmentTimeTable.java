@@ -382,6 +382,10 @@ public class FragmentTimeTable extends Fragment {
                             }
                         });
             }
+        }else{
+            spBatch.setVisibility(View.GONE);
+            rvTimeTable.setVisibility(View.GONE);
+            llNoList.setVisibility(View.VISIBLE);
         }
     }
     private void getSubjectPeriodOfBatch(){
@@ -450,7 +454,7 @@ public class FragmentTimeTable extends Fragment {
 
     }
     private void getTimeTableOfBatch() {
-        if(academicYearId != null) {
+        if(academicYearId != null && selectedBatch != null) {
             timeTableCollectionRef
                     .whereEqualTo("academicYearId", academicYearId)
                     .whereEqualTo("batchId", selectedBatch.getId())

@@ -207,6 +207,9 @@ public class FragmentEvent extends Fragment {
                 fragmentTransaction.replace(R.id.contentLayout, fragmentAddEvent).addToBackStack(null).commit();
             }
         });
+        if(batchIdList.size() == 0){
+            fab.hide();
+        }
         return view;
     }
 
@@ -233,7 +236,9 @@ public class FragmentEvent extends Fragment {
     private void onSelectBatch() {
         System.out.println("onSelectBatch");
         if (selectedBatch == null) {
-            selectedBatch = batchList.get(0);
+            if(batchList.size() > 0) {
+                selectedBatch = batchList.get(0);
+            }
         }
         getEventOfBatch();
     }
@@ -285,6 +290,9 @@ public class FragmentEvent extends Fragment {
                             }
                         }
                     });
+        }else{
+            rvEvent.setVisibility(View.GONE);
+            llNoList.setVisibility(View.VISIBLE);
         }
     }
 
@@ -334,11 +342,14 @@ public class FragmentEvent extends Fragment {
                             }
                         }
                     });
+        }else{
+            rvEvent.setVisibility(View.GONE);
+            llNoList.setVisibility(View.VISIBLE);
         }
     }
 
     private void getEventOfBatch() {
-        if(instituteId != null) {
+        if(instituteId != null && selectedBatch != null) {
             if (!pDialog.isShowing()) {
                 pDialog.show();
             }
@@ -384,6 +395,9 @@ public class FragmentEvent extends Fragment {
                             }
                         }
                     });
+        }else{
+            rvEvent.setVisibility(View.GONE);
+            llNoList.setVisibility(View.VISIBLE);
         }
     }
 
@@ -448,6 +462,8 @@ public class FragmentEvent extends Fragment {
                             }
                         });
             }
+        }else{
+            spBatch.setVisibility(View.GONE);
         }
     }
 

@@ -200,44 +200,49 @@ public class FragmentExamSeries extends Fragment {
                             }
                         });
             }
+        }else{
+            spBatch.setVisibility(View.GONE);
+            rvExamSeries.setVisibility(View.GONE);
+            llNoList.setVisibility(View.VISIBLE);
         }
     }
     private void getSubject() {
-        if (!pDialog.isShowing()) {
-            pDialog.show();
-        }
-        if (subjectList.size() != 0) {
-            subjectList.clear();
-        }
-        subjectListener = subjectCollectionRef
-                .whereEqualTo("batchId", selectedBatch.getId())
-                .orderBy("createdDate", Query.Direction.ASCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            return;
-                        }
-                        for (DocumentSnapshot documentSnapshot:queryDocumentSnapshots.getDocuments()){
-                            // Log.d(TAG, document.getId()document.getId() + " => " + document.getData());
-                            Subject subject = documentSnapshot.toObject(Subject.class);
-                            subject.setId(documentSnapshot.getId());
-                            subjectList.add(subject);
-                        }
-                        System.out.println("subjectList =>"+subjectList.size());
-                        if (subjectList.size() != 0) {
-                            getExamSeriesOfBatch();
-                        } else {
-                            if (pDialog.isShowing()) {
-                                pDialog.dismiss();
+        if(selectedBatch != null) {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+            if (subjectList.size() != 0) {
+                subjectList.clear();
+            }
+            subjectListener = subjectCollectionRef
+                    .whereEqualTo("batchId", selectedBatch.getId())
+                    .orderBy("createdDate", Query.Direction.ASCENDING)
+                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                            if (e != null) {
+                                return;
+                            }
+                            for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
+                                // Log.d(TAG, document.getId()document.getId() + " => " + document.getData());
+                                Subject subject = documentSnapshot.toObject(Subject.class);
+                                subject.setId(documentSnapshot.getId());
+                                subjectList.add(subject);
+                            }
+                            System.out.println("subjectList =>" + subjectList.size());
+                            if (subjectList.size() != 0) {
+                                getExamSeriesOfBatch();
+                            } else {
+                                if (pDialog.isShowing()) {
+                                    pDialog.dismiss();
+                                }
                             }
                         }
-                    }
-                });
-        // [END get_all_users]
+                    });
+        }
     }
     private void  getExamSeriesOfBatch() {
-        if(academicYearId != null) {
+        if(academicYearId != null && selectedBatch != null) {
             if (!pDialog.isShowing()) {
                 pDialog.show();
             }
@@ -356,21 +361,44 @@ public class FragmentExamSeries extends Fragment {
         public void onBindViewHolder(MyViewHolder holder, final int position) {
             final ExamSeries examSeries = examSeriesList.get(position);
             holder.tvESName.setText(""+examSeries.getName());
-            String date=Utility.formatDateToString(examSeries.getFromDate().getTime());
-            if(examSeries.getToDate() != null){
-                date = date + " to " +Utility.formatDateToString(examSeries.getToDate().getTime());
+            if(examSeries.getFromDate() != null) {
+                String date = Utility.formatDateToString(examSeries.getFromDate().getTime());
+                if (examSeries.getToDate() != null) {
+                    date = date + " to " + Utility.formatDateToString(examSeries.getToDate().getTime());
+                }
+                holder.tvESDate.setText("" + date);
+                if (examSeries.getToDate().getTime() > new Date().getTime()) {
+                    //holder.tvStatus.setVisibility(View.GONE);
+                } else {
+                    holder.tvStatus.setVisibility(View.VISIBLE);
+                }
             }
-            holder.tvESDate.setText(""+date);
-            if(examSeries.getToDate().getTime() > new Date().getTime()){
-                holder.tvStatus.setVisibility(View.GONE);
-            }else{
+            List<Exam> examForExamSeries = new ArrayList<>();
+            for (Exam exam:examList){
+                if(examSeries.getId().equals(exam.getExamSeriesId())) {
+                    examForExamSeries.add(exam);
+                }
+            }
+            if(examForExamSeries.size() == 0){
+                holder.tvStatus.setText("Note : Exams are not yet declared.");
                 holder.tvStatus.setVisibility(View.VISIBLE);
+                holder.tvDetails.setVisibility(View.GONE);
             }
             holder.tvDetails.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onCreateBottomSheet(examSeries);
-                    bottomSheetDialog.show();
+                    List<Exam> examForExamSeries = new ArrayList<>();
+                    for (Exam exam:examList){
+                        if(examSeries.getId().equals(exam.getExamSeriesId())) {
+                            examForExamSeries.add(exam);
+                        }
+                    }
+                    if(examForExamSeries.size() > 0){
+                        onCreateBottomSheet(examSeries,examForExamSeries);
+                        bottomSheetDialog.show();
+                    }else{
+                        bottomSheetDialog.hide();
+                    }
                 }
             });
         }
@@ -380,7 +408,7 @@ public class FragmentExamSeries extends Fragment {
             return examSeriesList.size();
         }
     }
-    public void onCreateBottomSheet(ExamSeries examSeries){
+    public void onCreateBottomSheet(ExamSeries examSeries,List<Exam> examForExamSeries){
         if(bottomSheetDialog == null){
             View viewBottom = LayoutInflater.from(getContext()).inflate(R.layout.bottom_sheet_view_exam, null);
             bottomSheetDialog = new BottomSheetDialog(getContext());
@@ -399,12 +427,6 @@ public class FragmentExamSeries extends Fragment {
             RecyclerView.LayoutManager layoutManagerForExam = new LinearLayoutManager(getContext());
             rvExam.setLayoutManager(layoutManagerForExam);
             RecyclerView.Adapter examAdapter;
-            List<Exam> examForExamSeries = new ArrayList<>();
-            for (Exam exam:examList){
-                if(examSeries.getId().equals(exam.getExamSeriesId())) {
-                    examForExamSeries.add(exam);
-                }
-            }
             if(examForExamSeries.size() > 0){
                 examAdapter = new ExamAdapter(examForExamSeries);
                 rvExam.setAdapter(examAdapter);

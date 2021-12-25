@@ -314,6 +314,9 @@ public class FragmentMySchedule extends Fragment {
                             }
                         });
             }
+        }else{
+            rvSchedule.setVisibility(View.GONE);
+            llNoList.setVisibility(View.VISIBLE);
         }
     }
     private void getBatch() {
@@ -348,6 +351,9 @@ public class FragmentMySchedule extends Fragment {
                             }
                         });
             }
+        }else{
+            rvSchedule.setVisibility(View.GONE);
+            llNoList.setVisibility(View.VISIBLE);
         }
     }
     private void getTimeTableOfDate() {

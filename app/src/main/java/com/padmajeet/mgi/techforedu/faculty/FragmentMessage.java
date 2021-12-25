@@ -188,10 +188,8 @@ public class FragmentMessage extends Fragment {
                     getKidsOfClass();
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -210,9 +208,12 @@ public class FragmentMessage extends Fragment {
     }
 
     private void onSelectBatch() {
-        System.out.println("batchList "+batchList.get(0).getName());
+
         if (selectedBatch == null) {
-            selectedBatch = batchList.get(0);
+            if(batchList.size() > 0) {
+                System.out.println("batchList "+batchList.get(0).getName());
+                selectedBatch = batchList.get(0);
+            }
         }
         if (isBatch) {
             System.out.println("isBatch " + isBatch);
@@ -284,78 +285,86 @@ public class FragmentMessage extends Fragment {
                             }
                         });
             }
+        }else{
+            spBatch.setVisibility(View.GONE);
+            spStudent.setVisibility(View.GONE);
         }
     }
 
     private void getKidsOfClass() {
-        if (pDialog != null && !pDialog.isShowing()) {
-            pDialog.show();
-        }
-        studentCollectionRef
-                .whereEqualTo("currentBatchId", selectedBatch.getId())
-                .orderBy("createdDate", Query.Direction.ASCENDING)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (studentList.size() != 0) {
-                            studentList.clear();
-                        }
-                        System.out.println("queryDocumentSnapshots " + queryDocumentSnapshots.size());
-                        for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
-                            // Log.d(TAG, document.getId()document.getId() + " => " + document.getData());
-                            Student student = documentSnapshot.toObject(Student.class);
-                            student.setId(documentSnapshot.getId());
-                            if(student.getStatus().equalsIgnoreCase("A")||student.getStatus().equalsIgnoreCase("N")){
-                                studentList.add(student);
+        if(selectedBatch != null) {
+            if (pDialog != null && !pDialog.isShowing()) {
+                pDialog.show();
+            }
+            studentCollectionRef
+                    .whereEqualTo("currentBatchId", selectedBatch.getId())
+                    .orderBy("createdDate", Query.Direction.ASCENDING)
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            if (studentList.size() != 0) {
+                                studentList.clear();
                             }
-                        }
-                        System.out.println("studentList " + studentList.size());
-                        if (studentList.size() != 0) {
-                            spStudent.setVisibility(View.VISIBLE);
-                            List<String> studentNameList = new ArrayList<>();
-                            for (Student student : studentList) {
-                                String name = student.getFirstName();
-                                if (!TextUtils.isEmpty(student.getMiddleName())) {
-                                    name = name + " " + student.getMiddleName();
+                            System.out.println("queryDocumentSnapshots " + queryDocumentSnapshots.size());
+                            for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
+                                // Log.d(TAG, document.getId()document.getId() + " => " + document.getData());
+                                Student student = documentSnapshot.toObject(Student.class);
+                                student.setId(documentSnapshot.getId());
+                                if (student.getStatus().equalsIgnoreCase("A") || student.getStatus().equalsIgnoreCase("N")) {
+                                    studentList.add(student);
                                 }
-                                if (!TextUtils.isEmpty(student.getLastName())) {
-                                    name = name + " " + student.getLastName();
-                                }
-                                studentNameList.add(name);
                             }
-                            ArrayAdapter<String> studentAdaptor = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, studentNameList);
-                            studentAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            spStudent.setAdapter(studentAdaptor);
-                            spStudent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                    selectedStudent = studentList.get(position);
-                                    getMessagesOfSelectStudent();
+                            System.out.println("studentList " + studentList.size());
+                            if (studentList.size() != 0) {
+                                spStudent.setVisibility(View.VISIBLE);
+                                List<String> studentNameList = new ArrayList<>();
+                                for (Student student : studentList) {
+                                    String name = student.getFirstName();
+                                    if (!TextUtils.isEmpty(student.getMiddleName())) {
+                                        name = name + " " + student.getMiddleName();
+                                    }
+                                    if (!TextUtils.isEmpty(student.getLastName())) {
+                                        name = name + " " + student.getLastName();
+                                    }
+                                    studentNameList.add(name);
                                 }
+                                ArrayAdapter<String> studentAdaptor = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, studentNameList);
+                                studentAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spStudent.setAdapter(studentAdaptor);
+                                spStudent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                        selectedStudent = studentList.get(position);
+                                        getMessagesOfSelectStudent();
+                                    }
 
-                                @Override
-                                public void onNothingSelected(AdapterView<?> parent) {
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
 
+                                    }
+                                });
+                            } else {
+                                if (pDialog != null && pDialog.isShowing()) {
+                                    pDialog.dismiss();
                                 }
-                            });
-                        } else {
+                                spStudent.setVisibility(View.GONE);
+                            }
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
                             if (pDialog != null && pDialog.isShowing()) {
                                 pDialog.dismiss();
                             }
-                            spStudent.setVisibility(View.GONE);
                         }
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        if (pDialog != null && pDialog.isShowing()) {
-                            pDialog.dismiss();
-                        }
-                    }
-                });
+                    });
+        }else{
+            rvMessage.setVisibility(View.GONE);
+            llNoList.setVisibility(View.VISIBLE);
+        }
     }
 
     private void getMessagesOfAllBatch() {
@@ -398,11 +407,14 @@ public class FragmentMessage extends Fragment {
                             }
                         }
                     });
+        }else{
+            rvMessage.setVisibility(View.GONE);
+            llNoList.setVisibility(View.VISIBLE);
         }
     }
 
     private void getMessagesOfSelectClass() {
-        if(academicYearId != null) {
+        if(academicYearId != null && selectedBatch != null) {
             if (pDialog != null && !pDialog.isShowing()) {
                 pDialog.show();
             }
@@ -440,6 +452,9 @@ public class FragmentMessage extends Fragment {
                             }
                         }
                     });
+        }else{
+            rvMessage.setVisibility(View.GONE);
+            llNoList.setVisibility(View.VISIBLE);
         }
     }
 

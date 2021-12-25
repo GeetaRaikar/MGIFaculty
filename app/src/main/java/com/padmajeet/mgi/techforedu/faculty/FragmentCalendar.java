@@ -189,11 +189,15 @@ public class FragmentCalendar extends Fragment {
                             }
                         });
             }
+        }else{
+            spBatch.setVisibility(View.GONE);
+            rvCalendar.setVisibility(View.GONE);
+            llNoList.setVisibility(View.VISIBLE);
         }
     }
 
     private void getCalendarOfBatch() {
-        if(academicYearId != null) {
+        if(academicYearId != null && selectedBatch != null) {
             if (!pDialog.isShowing()) {
                 pDialog.show();
             }
@@ -232,8 +236,10 @@ public class FragmentCalendar extends Fragment {
                             }
                         }
                     });
+        }else{
+            rvCalendar.setVisibility(View.GONE);
+            llNoList.setVisibility(View.VISIBLE);
         }
-
     }
 
     class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.MyViewHolder> {

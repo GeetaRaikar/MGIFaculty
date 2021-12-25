@@ -27,20 +27,20 @@ public class ActivitySplashScreen extends AppCompatActivity {
     private DocumentReference staffDocRef;
     private Staff loggedInUser;
     private String loggedInUserId;
-    private String parentId;
+    private String staffId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         sessionManager = new SessionManager(ActivitySplashScreen.this);
-        parentId = sessionManager.getString("loggedInUserId");
+        staffId = sessionManager.getString("loggedInUserId");
 
         new Handler().postDelayed(new Runnable() {
 
             @Override
             public void run() {
-                if (!TextUtils.isEmpty(parentId)) {
-                    validateParent(parentId);
+                if (!TextUtils.isEmpty(staffId)) {
+                    validateStaff(staffId);
                 }
                 else {
                     Intent i = new Intent(ActivitySplashScreen.this, ActivityLogin.class);
@@ -52,7 +52,7 @@ public class ActivitySplashScreen extends AppCompatActivity {
         }, 1000);
     }
 
-    private void validateParent(String documentId) {
+    private void validateStaff(String documentId) {
         staffDocRef = db.document("Staff/" + documentId);
         staffDocRef.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -61,6 +61,7 @@ public class ActivitySplashScreen extends AppCompatActivity {
                         System.out.println("Data -key -" + documentSnapshot.getId() + " value -" + documentSnapshot.getData());
                         loggedInUserId = documentSnapshot.getId();
                         loggedInUser = documentSnapshot.toObject(Staff.class);
+                        loggedInUser.setId(loggedInUserId);
                         System.out.println("Data -key -" + documentSnapshot.getId() + " value -" + loggedInUser);
                         System.out.println("loggedInUser -" + loggedInUser.getFirstName());
                         SessionManager sessionManager = new SessionManager(ActivitySplashScreen.this);
