@@ -895,7 +895,7 @@ public class FragmentTakeAttendance extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            final Batch batch = batchList.get(position);
+            final Batch batch = batchList.get(holder.getAdapterPosition());
             holder.tvClassName.setText("" + batch.getName());
             //System.out.println("Image path" + url);
             if (!TextUtils.isEmpty(batch.getImageUrl())) {
@@ -906,7 +906,7 @@ public class FragmentTakeAttendance extends Fragment {
                         .placeholder(R.drawable.no_image)
                         .into(holder.ivClassPic);
             }
-            if(selectedClassPos == position){
+            if(selectedClassPos == holder.getAdapterPosition()){
                 holder.tvClassName.setTextColor(getResources().getColor(R.color.colorGreen));
                 holder.llImage.setBackground(getResources().getDrawable(R.drawable.circle_green));
             }
@@ -917,7 +917,7 @@ public class FragmentTakeAttendance extends Fragment {
             holder.row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    selectedClassPos = position;
+                    selectedClassPos = holder.getAdapterPosition();
                     selectedBatch = batch;
                     cvAttendanceSummary.setVisibility(View.GONE);
                     getSubjectPeriodOfBatch();
@@ -959,12 +959,12 @@ public class FragmentTakeAttendance extends Fragment {
 
         @Override
         public void onBindViewHolder(final MyViewHolder holder, int position) {
-            final TimeTableForPeriod timeTableForPeriod = timeTableForPeriodArrayList.get(position);
+            final TimeTableForPeriod timeTableForPeriod = timeTableForPeriodArrayList.get(holder.getAdapterPosition());
             holder.tvSubjectName.setText("" + timeTableForPeriod.getSubject());
             holder.tvPeriodName.setText("" + timeTableForPeriod.getPeriod());
-            int colorCode = position%5;
+            int colorCode = holder.getAdapterPosition()%5;
             holder.llImage.setBackground(getResources().getDrawable(squares[colorCode]));
-            if(selectedSectionPos==position){
+            if(selectedSectionPos==holder.getAdapterPosition()){
                 holder.llSelected.setVisibility(View.VISIBLE);
             }
             else {
@@ -973,7 +973,7 @@ public class FragmentTakeAttendance extends Fragment {
             holder.row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    selectedSectionPos = position;
+                    selectedSectionPos = holder.getAdapterPosition();
                     selectedTimeTableForPeriod = timeTableForPeriod;
                     getAttendanceOfTimeTableForDate();
                     notifyDataSetChanged();
