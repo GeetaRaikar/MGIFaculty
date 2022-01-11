@@ -42,19 +42,11 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/radioAllBatch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:checked="true"
-                        android:text="@string/all_batch_cap"
-                        android:textSize="15sp" />
-
-                    <RadioButton
                         android:id="@+id/radioSelectBatch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:checked="true"
                         android:text="@string/select_batch_cap"
                         android:textSize="15sp" />
 
@@ -72,13 +64,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingBottom="5dp"
-                    android:visibility="gone">
+                    android:paddingBottom="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:drawableLeft="@drawable/ic_class_02"
+                        android:drawablePadding="@dimen/drawablePaddingSize"
                         android:text="@string/select_batches_cap"
                         android:textColor="@color/colorPrimary"
                         android:textStyle="bold" />
@@ -95,7 +88,7 @@
                     android:id="@+id/llStudent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:paddingBottom="5dp"
                     android:visibility="gone">
 
@@ -103,6 +96,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:drawableLeft="@drawable/ic_student_02"
+                        android:drawablePadding="@dimen/drawablePaddingSize"
                         android:text="@string/select_students_cap"
                         android:textColor="@color/colorPrimary"
                         android:textStyle="bold" />
@@ -171,7 +166,7 @@
                     android:clickable="true"
                     android:gravity="center"
                     android:paddingEnd="5dp"
-                    android:src="@drawable/ic_mic_black" />
+                    android:src="@drawable/ic_google_voice" />
             </LinearLayout>
 
             <Button

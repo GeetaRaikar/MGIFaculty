@@ -19,7 +19,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:drawableTop="@drawable/ic_attendance_small"
+                android:drawableTop="@drawable/ic_calendar_01"
                 android:layout_gravity="center"
                 android:text="@string/date_cap" />
 

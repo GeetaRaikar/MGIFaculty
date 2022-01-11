@@ -204,6 +204,9 @@ public class FragmentMessage extends Fragment {
                 fragmentTransaction.replace(R.id.contentLayout, fragmentAddMessage).addToBackStack(null).commit();
             }
         });
+        if(batchIdList.size() == 0){
+            fab.hide();
+        }
         getBatches();
     }
 
@@ -311,7 +314,7 @@ public class FragmentMessage extends Fragment {
                                 // Log.d(TAG, document.getId()document.getId() + " => " + document.getData());
                                 Student student = documentSnapshot.toObject(Student.class);
                                 student.setId(documentSnapshot.getId());
-                                if (student.getStatus().equalsIgnoreCase("A") || student.getStatus().equalsIgnoreCase("N")) {
+                                if (!student.getStatus().equalsIgnoreCase("I")) {
                                     studentList.add(student);
                                 }
                             }
@@ -421,7 +424,7 @@ public class FragmentMessage extends Fragment {
             messageListener = messageCollectionRef
                     .whereEqualTo("academicYearId", academicYearId)
                     .whereEqualTo("category", "C")
-                    .whereArrayContains("batchList", selectedBatch.getId())
+                    .whereArrayContains("batchIdList", selectedBatch.getId())
                     .orderBy("createdDate", Query.Direction.DESCENDING)
                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
                         @Override
@@ -459,14 +462,14 @@ public class FragmentMessage extends Fragment {
     }
 
     private void getMessagesOfSelectStudent() {
-        if(academicYearId != null) {
+        if(academicYearId != null && selectedStudent != null) {
             if (pDialog != null && !pDialog.isShowing()) {
                 pDialog.show();
             }
             messageListener = messageCollectionRef
                     .whereEqualTo("academicYearId", academicYearId)
                     .whereEqualTo("category", "S")
-                    .whereArrayContains("recipientId", selectedStudent.getId())
+                    .whereArrayContains("recipientIdList", selectedStudent.getId())
                     .orderBy("createdDate", Query.Direction.DESCENDING)
                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
                         @Override
@@ -477,6 +480,7 @@ public class FragmentMessage extends Fragment {
                             if (messageList.size() != 0) {
                                 messageList.clear();
                             }
+                            System.out.println("messageList size - "+queryDocumentSnapshots.size());
                             for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
                                 // Log.d(TAG, document.getId()document.getId() + " => " + document.getData());
                                 Message message = documentSnapshot.toObject(Message.class);

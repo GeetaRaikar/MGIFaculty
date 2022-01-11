@@ -26,7 +26,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="5dp"
-                android:drawableLeft="@drawable/ic_batch_small"
+                android:drawableLeft="@drawable/ic_class_02"
+                android:drawablePadding="@dimen/drawablePaddingSize"
                 android:paddingLeft="3dp"
                 android:text="@string/select_batch_cap"
                 android:textColor="@color/colorPrimaryDark"
@@ -72,8 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    >
+                    android:gravity="center">
                     <TextView
                         android:text="@string/code_cap"
                         android:layout_margin="0.5dp"

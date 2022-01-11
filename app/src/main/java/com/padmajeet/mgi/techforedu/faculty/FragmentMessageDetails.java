@@ -392,18 +392,29 @@ public class FragmentMessageDetails extends Fragment {
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sDialog) {
-
                         String subject = etSubject.getText().toString().trim();
                         if (TextUtils.isEmpty(subject)) {
-                            etSubject.setError("Enter subject");
+                            etSubject.setError(getString(R.string.errInvalidSubject));
                             etSubject.requestFocus();
                             return;
+                        }else{
+                            if(Utility.isDecimalValid(subject)){
+                                etSubject.setError(getString(R.string.errInvalidSubject));
+                                etSubject.requestFocus();
+                                return;
+                            }
                         }
                         String desc = etDescription.getText().toString().trim();
                         if (TextUtils.isEmpty(desc)) {
-                            etDescription.setError("Enter the description");
+                            etDescription.setError(getString(R.string.errInvalidDesc));
                             etDescription.requestFocus();
                             return;
+                        }else{
+                            if(Utility.isDecimalValid(desc)){
+                                etDescription.setError(getString(R.string.errInvalidDesc));
+                                etDescription.requestFocus();
+                                return;
+                            }
                         }
                         sDialog.dismissWithAnimation();
                         if (pDialog != null) {

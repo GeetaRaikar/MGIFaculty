@@ -14,11 +14,11 @@
 
     <ImageView
         android:id="@+id/ivProfilePic"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@drawable/ic_parent" />
+        app:srcCompat="@drawable/ic_professor_01" />
 
     <TextView
         android:id="@+id/tv_nav_name"

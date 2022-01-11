@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_class_small"
+                android:drawableLeft="@drawable/ic_class_02"
                 android:drawablePadding="@dimen/drawablePaddingSize"
                 android:text="@string/select_batch_cap"
                 android:textColor="@color/colorPrimaryDark"
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_book_small"
+                android:drawableLeft="@drawable/ic_subject_01"
                 android:drawablePadding="@dimen/drawablePaddingSize"
                 android:text="@string/select_subject_cap"
                 android:textColor="@color/colorPrimaryDark"
@@ -157,7 +157,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="right|center"
                 android:clickable="true"
-                android:src="@drawable/ic_calendar_small" />
+                android:src="@drawable/ic_calendar_01" />
         </LinearLayout>
 
         <LinearLayout
@@ -193,7 +193,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="right|center"
                 android:clickable="true"
-                android:src="@drawable/ic_calendar_small" />
+                android:src="@drawable/ic_calendar_01" />
         </LinearLayout>
 
         <LinearLayout
@@ -205,7 +205,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|center"
-                android:text="PROFILE_20201235.pdf"
+                android:text="Ex: PROFILE_20201235.pdf"
                 android:layout_weight="4"
                 android:padding="5dp" />
 
@@ -217,7 +217,7 @@
                 android:layout_gravity="center"
                 android:tooltipText="@string/add_attach_cap"
                 android:background="@color/float_transparent"
-                android:src="@drawable/ic_attach_small" />
+                android:src="@drawable/ic_upload_file_01" />
             <ImageButton
                 android:id="@+id/ibRemoveFile"
                 android:layout_width="wrap_content"
@@ -226,7 +226,7 @@
                 android:layout_gravity="center"
                 android:tooltipText="@string/delete_attach_cap"
                 android:background="@color/float_transparent"
-                android:src="@drawable/ic_deleted_small" />
+                android:src="@drawable/ic_cancel_file_01" />
         </LinearLayout>
         <Button
             android:id="@+id/btnSave"

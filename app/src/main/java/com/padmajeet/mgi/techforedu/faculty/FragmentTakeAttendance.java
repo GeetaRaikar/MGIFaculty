@@ -1,6 +1,5 @@
 package com.padmajeet.mgi.techforedu.faculty;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,10 +7,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageButton;
@@ -58,7 +55,6 @@ import com.padmajeet.mgi.techforedu.faculty.model.TimeTable;
 import com.padmajeet.mgi.techforedu.faculty.util.SessionManager;
 import com.padmajeet.mgi.techforedu.faculty.util.Utility;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -230,7 +226,6 @@ public class FragmentTakeAttendance extends Fragment {
         }.getType());
         System.out.println("sessionManager batchIdList "+batchIdJson+" value "+batchIdList.toString());
         pDialog = Utility.createSweetAlertDialog(getContext());
-
     }
 
     public FragmentTakeAttendance() {
@@ -247,7 +242,7 @@ public class FragmentTakeAttendance extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((ActivityHome) getActivity()).getSupportActionBar().setTitle(getString(R.string.timeTable));
+        ((ActivityHome) getActivity()).getSupportActionBar().setTitle(getString(R.string.takeAttendance));
         llNoList = view.findViewById(R.id.llNoList);
         rvTimetable = view.findViewById(R.id.rvTimetable);
         rvClasses = view.findViewById(R.id.rvClasses);
@@ -825,16 +820,26 @@ public class FragmentTakeAttendance extends Fragment {
             TextView tvLastName = row.findViewById(R.id.tvLastName);
             ImageView ivProfilePic = row.findViewById(R.id.ivProfilePic);
             final ImageButton ibChoosePhoto = row.findViewById(R.id.ibChoosePhoto);
-
+            int profileDrawable=R.drawable.ic_female_01;
 
             tvFirstName.setText(""+student.getFirstName());
             tvLastName.setText(""+student.getLastName());
+            if(student.getGender().equalsIgnoreCase("Male")){
+                profileDrawable=R.drawable.ic_male_01;
+            }
             if(!TextUtils.isEmpty(student.getImageUrl())) {
                 Glide.with(getContext())
                         .load(student.getImageUrl())
                         .fitCenter()
                         .apply(RequestOptions.circleCropTransform())
-                        .placeholder(R.drawable.ic_student)
+                        .placeholder(profileDrawable)
+                        .into(ivProfilePic);
+            }else{
+                Glide.with(getContext())
+                        .load(profileDrawable)
+                        .fitCenter()
+                        .apply(RequestOptions.circleCropTransform())
+                        .placeholder(profileDrawable)
                         .into(ivProfilePic);
             }
 
@@ -889,7 +894,7 @@ public class FragmentTakeAttendance extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(final MyViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             final Batch batch = batchList.get(position);
             holder.tvClassName.setText("" + batch.getName());
             //System.out.println("Image path" + url);

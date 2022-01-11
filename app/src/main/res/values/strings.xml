@@ -63,7 +63,7 @@
     <string name="verify_cap">VERIFY</string>
     <string name="fees_cap">FEES</string>
     <string name="date_cap">DATE</string>
-    <string name="code_cap">SUBJECT   CODE</string>
+    <string name="code_cap">SUBJECT CODE</string>
     <string name="total_cap">TOTAL</string>
     <string name="present_cap">PRESENT</string>
     <string name="exam_cap">EXAM NAME</string>
@@ -122,4 +122,10 @@
     <string name="examSchedule">Exam Schedule</string>
     <string name="add_message">Add Message</string>
     <string name="home_work">Assignment</string>
+    <string name="errInvalidAddress">Invalid address</string>
+    <string name="errInvalidSubject">Invalid subject</string>
+    <string name="errInvalidDesc">Invalid description</string>
+    <string name="errInvalidBatchSelect">Please select any one class.</string>
+    <string name="errInvalidStudentSelect">Please select any one student.</string>
+    <string name="emptyMark">Enter the marks</string>
 </resources>

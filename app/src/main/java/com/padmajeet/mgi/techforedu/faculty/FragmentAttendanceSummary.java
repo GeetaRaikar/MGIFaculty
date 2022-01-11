@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -410,6 +411,7 @@ public class FragmentAttendanceSummary extends Fragment {
                                 data.setValueTextSize(11f);
                                 data.setValueTextColor(Color.WHITE);
                                 chart.setData(data);
+                                chart.getDescription().setText("Subjects wise attendance summary");
 
                                 chart.invalidate();
                             } else {

@@ -15,11 +15,10 @@
 
         <ImageView
             android:id="@+id/ivProfilePic"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:layout_gravity="center"
-            android:padding="5dp"
-            android:src="@drawable/ic_student" />
+            android:padding="5dp" />
 
         <ImageButton
             android:id="@+id/ibChoosePhoto"

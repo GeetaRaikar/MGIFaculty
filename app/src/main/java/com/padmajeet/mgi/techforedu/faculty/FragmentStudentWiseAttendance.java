@@ -435,6 +435,7 @@ public class FragmentStudentWiseAttendance extends Fragment {
             holder.tvName.setText(""+studentAttendance.student.getFirstName()+" "+studentAttendance.student.getLastName());
             holder.tvTotalClass.setText(""+studentAttendance.totalCount);
             holder.tvPresentClass.setText(""+studentAttendance.presentCount);
+
             float percentage = 0f;
             if(studentAttendance.totalCount>0) {
                 percentage = (studentAttendance.presentCount * 100f) / studentAttendance.totalCount;
@@ -442,13 +443,23 @@ public class FragmentStudentWiseAttendance extends Fragment {
             holder.tvAttendancePercentage.setText(""+percentage+"%");
             //System.out.println("StudentAttendance - "+studentAttendance.presentCount);
             String url = "" + studentAttendance.student.getImageUrl();
-            //System.out.println("Image path" + url);
-            if (!TextUtils.isEmpty(url)) {
+            int profileDrawable=R.drawable.ic_female_01;
+            if(studentAttendance.student.getGender().equalsIgnoreCase("Male")){
+                profileDrawable=R.drawable.ic_male_01;
+            }
+            if(!TextUtils.isEmpty(url)) {
                 Glide.with(getContext())
                         .load(url)
                         .fitCenter()
                         .apply(RequestOptions.circleCropTransform())
-                        .placeholder(R.drawable.ic_student)
+                        .placeholder(profileDrawable)
+                        .into(holder.ivProfilePic);
+            }else{
+                Glide.with(getContext())
+                        .load(profileDrawable)
+                        .fitCenter()
+                        .apply(RequestOptions.circleCropTransform())
+                        .placeholder(profileDrawable)
                         .into(holder.ivProfilePic);
             }
 

@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorWhite"
-                android:drawableLeft="@drawable/ic_event_color"
+                android:drawableLeft="@drawable/ic_event_01"
                 android:drawablePadding="@dimen/drawablePaddingSize"
                 android:textSize="16sp" />
 
@@ -32,7 +32,7 @@
                 android:paddingBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_class_small"
+                android:drawableLeft="@drawable/ic_class_02"
                 android:textColor="@color/colorWhite"
                 android:drawablePadding="@dimen/drawablePaddingSize"
                 android:textSize="16sp" />
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingBottom="5dp"
-                android:drawableLeft="@drawable/ic_dress_code"
+                android:drawableLeft="@drawable/ic_dress_code_01"
                 android:drawablePadding="@dimen/drawablePaddingSize"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp" />
@@ -52,16 +52,15 @@
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/tvCreatorType"
-                    android:drawableLeft="@drawable/ic_admin_small"
+                    android:drawableLeft="@drawable/ic_staff_01"
                     android:drawablePadding="@dimen/drawablePaddingSize"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textColor="@color/colorWhite"
-
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/tvDate"
-                    android:drawableLeft="@drawable/ic_calendar_small"
+                    android:drawableLeft="@drawable/ic_calendar_01"
                     android:drawablePadding="@dimen/drawablePaddingSize"
                     android:layout_width="0dp"
                     android:layout_weight="1"

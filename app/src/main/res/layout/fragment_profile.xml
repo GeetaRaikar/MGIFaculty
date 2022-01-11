@@ -106,12 +106,10 @@
 
             <ImageView
                 android:id="@+id/ivPhone"
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:src="@drawable/ic_phone"
-                android:tint="@color/colorPrimaryDark" />
-
-
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_phone_01"
+                android:layout_marginEnd="@dimen/drawablePaddingSize"/>
             <EditText
                 android:id="@+id/etMobileNumber"
                 android:layout_width="wrap_content"
@@ -121,7 +119,6 @@
                 android:enabled="false"
                 android:inputType="phone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
 
         </LinearLayout>
 
@@ -135,10 +132,10 @@
 
             <ImageView
                 android:id="@+id/ivEmail"
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:src="@drawable/ic_email"
-                android:tint="@color/colorPrimaryDark" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_email_01"
+                android:layout_marginEnd="@dimen/drawablePaddingSize"/>
 
             <EditText
                 android:id="@+id/etEmail"
@@ -169,12 +166,12 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin">
 
-            <TextView
+            <ImageView
+                android:id="@+id/ivAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="5dp"
-                android:text="Address"
-                android:textColor="@color/colorPrimaryDark" />
+                android:src="@drawable/ic_home_address_01"
+                android:layout_marginEnd="@dimen/drawablePaddingSize"/>
 
             <EditText
                 android:id="@+id/etAddress"

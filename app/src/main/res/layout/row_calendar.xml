@@ -70,7 +70,7 @@
                     android:id="@+id/tvDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_calendar_small"
+                    android:drawableLeft="@drawable/ic_calendar_01"
                     android:drawablePadding="@dimen/drawablePaddingSize"
                     android:textSize="12sp" />
 

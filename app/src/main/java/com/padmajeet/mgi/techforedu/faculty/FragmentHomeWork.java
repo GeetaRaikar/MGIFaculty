@@ -9,6 +9,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -23,6 +24,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import android.os.Handler;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -411,7 +413,7 @@ public class FragmentHomeWork extends Fragment {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
             public TextView tvName, tvSubjectName, tvCreatedDate, tvDueDate;
-            public ImageView ivAttachmentHomeWork,ivSubjectPic;
+            public ImageView ivAttachmentHomeWork,ivSubjectPic,ivDeleteHomeWork;
             View row;
 
             public MyViewHolder(View view) {
@@ -422,6 +424,7 @@ public class FragmentHomeWork extends Fragment {
                 tvDueDate = view.findViewById(R.id.tvDueDate);
                 ivAttachmentHomeWork=view.findViewById(R.id.ivAttachmentHomeWork);
                 ivSubjectPic= view.findViewById(R.id.ivSubjectPic);
+                ivDeleteHomeWork=view.findViewById(R.id.ivDeleteHomeWork);
                 row = view;
             }
         }
@@ -474,6 +477,12 @@ public class FragmentHomeWork extends Fragment {
             holder.ivAttachmentHomeWork.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    SweetAlertDialog pDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
+                    pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                    pDialog.setTitleText("Downloading...");
+                    pDialog.setCancelable(false);
+                    pDialog.show();
+
                     String url = homeWork.getAttachmentUrl();
                     String fileName = url.substring(url.lastIndexOf('/') + 1);
                     String fileName1 = fileName.substring(0, fileName.lastIndexOf('?'));
@@ -495,6 +504,7 @@ public class FragmentHomeWork extends Fragment {
                             String action = intent.getAction();
                             if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
                                 Toast.makeText(getContext(), "Download Completed", Toast.LENGTH_SHORT).show();
+                                pDialog.dismiss();
                             }
                         }
                     };
@@ -503,7 +513,44 @@ public class FragmentHomeWork extends Fragment {
                             new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
                 }
             });
-
+            holder.ivDeleteHomeWork.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SweetAlertDialog dialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                            .setConfirmText("Confirm")
+                            .setContentText("Delete assignment permanently?")
+                            .setCancelButton("Cancel", new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                }
+                            })
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    homeWorkCollectionRef.document(homeWork.getId())
+                                            .delete()
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    sDialog.dismissWithAnimation();
+                                                    getHomeWork();
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    sDialog.dismissWithAnimation();
+                                                    Toast.makeText(getContext(), "Delete unsuccessful", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
+                            });
+                    dialog.getWindow().setGravity(Gravity.CENTER);
+                    dialog.setCancelable(false);
+                    dialog.show();
+                }
+            });
 
         }
 

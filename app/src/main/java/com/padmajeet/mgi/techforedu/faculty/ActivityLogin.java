@@ -251,7 +251,7 @@ public class ActivityLogin extends AppCompatActivity {
                             Glide.with(getApplicationContext())
                                     .load(imageUrl)
                                     .fitCenter()
-                                    .placeholder(R.drawable.kiddie_logo)
+                                    .placeholder(R.drawable.mgi_logo_02)
                                     .into(appIcon);
                         }
                     }

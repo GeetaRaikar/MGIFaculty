@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_class_small"
+                    android:drawableLeft="@drawable/ic_class_02"
                     android:drawablePadding="@dimen/drawablePaddingSize"
                     android:text="@string/select_batch_cap"
                     android:textColor="@color/colorPrimaryDark"
@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_student_small"
+                    android:drawableLeft="@drawable/ic_student_02"
                     android:drawablePadding="@dimen/drawablePaddingSize"
                     android:text="@string/select_student_cap"
                     android:textColor="@color/colorPrimaryDark"
@@ -154,8 +154,7 @@
             android:layout_gravity="bottom|left"
             android:layout_margin="@dimen/fab_margin"
             android:src="@drawable/ic_message"
-            app:backgroundTint="@color/colorPrimary"
-            android:visibility="gone"/>
+            app:backgroundTint="@color/colorPrimary"/>
     </FrameLayout>
 
 

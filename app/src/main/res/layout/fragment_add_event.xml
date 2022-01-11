@@ -143,7 +143,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="5dp"
-                    android:drawableLeft="@drawable/ic_event_color"
+                    android:drawableLeft="@drawable/ic_event_01"
                     android:drawablePadding="3dp"
                     android:text="@string/select_event_type_cap"
                     android:textColor="@color/colorPrimaryDark"
@@ -232,7 +232,7 @@
                     android:layout_height="30dp"
                     android:layout_gravity="right|center"
                     android:clickable="true"
-                    android:src="@drawable/ic_calendar_small"/>
+                    android:src="@drawable/ic_calendar_01"/>
             </LinearLayout>
 
             <LinearLayout
@@ -269,7 +269,7 @@
                     android:layout_height="30dp"
                     android:layout_gravity="right|center"
                     android:clickable="true"
-                    android:src="@drawable/ic_calendar_small" />
+                    android:src="@drawable/ic_calendar_01" />
             </LinearLayout>
 
             <TextView
@@ -307,7 +307,7 @@
                     android:clickable="true"
                     android:gravity="center"
                     android:paddingEnd="5dp"
-                    android:src="@drawable/ic_mic_black" />
+                    android:src="@drawable/ic_google_voice" />
             </LinearLayout>
 
             <Button

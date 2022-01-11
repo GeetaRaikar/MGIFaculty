@@ -74,7 +74,7 @@
                     android:id="@+id/tvMobileNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_phone_small"
+                    android:drawableLeft="@drawable/ic_phone_01"
                     android:drawablePadding="3dp"
                     android:textColor="@color/colorBlack"
                     android:textSize="16sp" />

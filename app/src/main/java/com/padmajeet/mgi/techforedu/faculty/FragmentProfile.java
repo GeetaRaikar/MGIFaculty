@@ -43,12 +43,10 @@ public class FragmentProfile extends Fragment {
     private ImageView ivProfilePic;
     private Button btUpdateProfile;
     private boolean isEmailEdited, isAddressEdited;
-    private Fragment currentFragment;
     private Gson gson;
     private String loggedInUserId;
     private TextView tvResetPassword;
     private TextView tvStaffName;
-    private ImageView ivProfile;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference staffCollectionRef = db.collection("Staff");
 
@@ -73,7 +71,6 @@ public class FragmentProfile extends Fragment {
         view = inflater.inflate(R.layout.fragment_profile, container, false);
         ((ActivityHome) getActivity()).getSupportActionBar().setTitle(getString(R.string.profile));
 
-        currentFragment = this;
         isEmailEdited = false;
         isAddressEdited = false;
         btUpdateProfile = view.findViewById(R.id.btUpdateProfile);
@@ -187,7 +184,12 @@ public class FragmentProfile extends Fragment {
         if (isAddressEdited) {
             String updatedAddress = etAddress.getText().toString().trim();
             if (!TextUtils.isEmpty(updatedAddress)) {
-                loggedInUser.setAddress(updatedAddress);
+                if(Utility.isDecimalValid(updatedAddress)){
+                    etAddress.setError(getString(R.string.errInvalidAddress));
+                    canSave = false;
+                }else{
+                    loggedInUser.setAddress(updatedAddress);
+                }
             }
         }
 

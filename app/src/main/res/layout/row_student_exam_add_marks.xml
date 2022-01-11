@@ -27,8 +27,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGrey"
-                    android:drawableLeft="@drawable/ic_idenfication_small"
-                    android:drawablePadding="3dp"
+                    android:drawableLeft="@drawable/ic_student_id_01"
+                    android:drawablePadding="@dimen/drawablePaddingSize"
                     android:textSize="15sp" />
 
                 <TextView
@@ -37,8 +37,8 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorBlack"
                     android:textSize="15sp"
-                    android:drawableLeft="@drawable/ic_student_small"
-                    android:drawablePadding="3dp"
+                    android:drawableLeft="@drawable/ic_student_02"
+                    android:drawablePadding="@dimen/drawablePaddingSize"
                     android:layout_marginTop="5dp"/>
             </LinearLayout>
 

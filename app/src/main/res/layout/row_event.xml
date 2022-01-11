@@ -40,7 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:drawableLeft="@drawable/ic_event_color"
+                    android:drawableLeft="@drawable/ic_event_01"
                     android:drawablePadding="@dimen/drawablePaddingSize"
                     android:textColor="@color/colorBlack"
                     android:textSize="15sp"
@@ -51,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:drawableLeft="@drawable/ic_calendar_small"
+                    android:drawableLeft="@drawable/ic_calendar_01"
                     android:drawablePadding="@dimen/drawablePaddingSize" />
 
                 <TextView
@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:drawableLeft="@drawable/ic_dress_code"
+                    android:drawableLeft="@drawable/ic_dress_code_01"
                     android:drawablePadding="@dimen/drawablePaddingSize"
                     android:textColor="@color/colorGrey"
                     android:textSize="12sp" />

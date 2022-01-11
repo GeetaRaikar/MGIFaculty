@@ -119,7 +119,7 @@ public class FragmentExamSeriesScore extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((ActivityHome)getActivity()).getSupportActionBar().setTitle(getString(R.string.examSchedule));
+        ((ActivityHome)getActivity()).getSupportActionBar().setTitle(getString(R.string.scoreCard));
         spBatch = view.findViewById(R.id.spBatch);
         llNoList = view.findViewById(R.id.llNoList);
         rvExamSeriesScore = view.findViewById(R.id.rvExamSeriesScore);
@@ -367,6 +367,8 @@ public class FragmentExamSeriesScore extends Fragment {
             if(examForExamSeries.size() > 0){
                 examAdapter = new ExamAdapter(examForExamSeries);
                 holder.rvExamScore.setAdapter(examAdapter);
+            }else{
+                holder.ivShow.setVisibility(View.GONE);
             }
             holder.ivShow.setOnClickListener(new View.OnClickListener() {
                 @Override

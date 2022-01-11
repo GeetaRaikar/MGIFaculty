@@ -47,8 +47,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:layout_marginTop="5dp"
-                    android:drawableLeft="@drawable/ic_faculty_small"
-                    android:drawablePadding="3dp"
+                    android:drawableLeft="@drawable/ic_staff_01"
+                    android:drawablePadding="@dimen/drawablePaddingSize"
                     android:layout_marginBottom="5dp"
                     android:textColor="@color/colorGrey"/>
                 <View
@@ -67,8 +67,8 @@
                         android:layout_weight="2"
                         android:gravity="left"
                         android:text="asd"
-                        android:drawableLeft="@drawable/ic_time_small"
-                        android:drawablePadding="3dp"
+                        android:drawableLeft="@drawable/ic_time_01"
+                        android:drawablePadding="@dimen/drawablePaddingSize"
                         android:textSize="15sp" />
                     <TextView
                         android:id="@+id/tvDuration"

@@ -73,6 +73,12 @@ public class Utility {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
+    public static boolean isDecimalValid(String text) {
+        String DIGIT_PATTERN = "^[0-9]+\\.?[0-9]*$";
+        Pattern pattern = Pattern.compile(DIGIT_PATTERN);
+        Matcher matcher = pattern.matcher(text);
+        return matcher.matches();
+    }
     //TODO
     public static boolean isDateValid(String date) {
         String Date_PATTERN = "^(((0[1-9]|[12]\\d|3[01])\\/(0[13578]|1[02])\\/((19|[2-9]\\d)\\d{2}))|((0[1-9]|[12]\\d|30)\\/(0[13456789]|1[012])\\/((19|[2-9]\\d)\\d{2}))|((0[1-9]|1\\d|2[0-8])\\/02\\/((19|[2-9]\\d)\\d{2}))|(29\\/02\\/((1[6-9]|[2-9]\\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$";

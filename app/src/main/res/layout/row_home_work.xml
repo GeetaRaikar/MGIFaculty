@@ -56,7 +56,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:drawableLeft="@drawable/ic_calendar_small"
+                        android:drawableLeft="@drawable/ic_calendar_01"
                         android:drawablePadding="@dimen/drawablePaddingSize"
                         android:textColor="@color/colorBlack"
                         android:textSize="14sp" />
@@ -67,7 +67,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:drawableLeft="@drawable/ic_calendar_small"
+                        android:drawableLeft="@drawable/ic_calendar_01"
                         android:drawablePadding="@dimen/drawablePaddingSize"
                         android:textColor="@color/colorBlack"
                         android:textSize="14sp" />
@@ -106,23 +106,23 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <!--<ImageView
-                    android:id="@+id/ivHomeWorkRecord"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:src="@drawable/ic_next_page"
-                    android:tint="@color/colorPrimary" />-->
-
                 <ImageView
                     android:id="@+id/ivAttachmentHomeWork"
                     android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|start"
                     android:clickable="true"
                     android:src="@drawable/ic_file_download"
-                    android:tint="@color/colorPrimary" />
+                    android:tint="@color/colorPrimary"
+                    android:layout_marginBottom="15dp" />
+                <ImageView
+                    android:id="@+id/ivDeleteHomeWork"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:tint="@color/colorPrimary"
+                    android:src="@drawable/ic_delete_forever"
+                    android:clickable="true"/>
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

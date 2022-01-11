@@ -99,7 +99,7 @@ public class FragmentAboutUs extends Fragment {
                                     Glide.with(getContext())
                                             .load(institute.getLogoImagePath())
                                             .fitCenter()
-                                            .placeholder(R.drawable.mgi_logo)
+                                            .placeholder(R.drawable.mgi_logo_02)
                                             .into(ivLogo);
                                 }
                                 tvName.setText("" + institute.getName());

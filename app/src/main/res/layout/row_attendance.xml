@@ -20,9 +20,8 @@
             android:padding="5dp">
             <ImageView
                 android:id="@+id/ivProfilePic"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_student"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_gravity="center"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,7 +38,7 @@
                     android:layout_gravity="left"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
-                    android:drawableLeft="@drawable/ic_student_small"
+                    android:drawableLeft="@drawable/ic_student_02"
                     android:drawablePadding="@dimen/drawablePaddingSize"
                     android:gravity="left"
                     android:textColor="@color/colorBlack"/>
@@ -122,12 +121,12 @@
                     android:textSize="12sp"/>-->
                 <ImageButton
                     android:id="@+id/ibDayWiseAttendance"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/ic_day_wise"
-                    android:background="@color/float_transparent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    />
+                    android:background="@color/float_transparent"
+                    android:src="@drawable/ic_calendar"
+                    android:tint="@color/colorPrimary"/>
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

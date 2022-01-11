@@ -85,7 +85,7 @@ public class FragmentAddMessage extends Fragment {
     private final int REQ_CODE_SPEECH_INPUT = 100;
     private ImageButton ibMic;
     private StringBuffer comment = new StringBuffer();
-    private String category_add = "A";
+    private String category_add = "C";
     private int count;
 
     class Stu {
@@ -155,11 +155,6 @@ public class FragmentAddMessage extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton rb = (RadioButton) group.findViewById(checkedId);
-                if (radioAllBatch.isChecked()) {
-                    category_add = "A";
-                    llBatch.setVisibility(View.GONE);
-                    llStudent.setVisibility(View.GONE);
-                }
                 if (radioSelectBatch.isChecked()) {
                     category_add = "C";
                     llBatch.setVisibility(View.VISIBLE);
@@ -186,7 +181,7 @@ public class FragmentAddMessage extends Fragment {
                 if (category_add.equalsIgnoreCase("C")) {
                     selectedStudentIdList.clear();
                     if (selectedBatchList.isEmpty()) {
-                        tvError.setText("Please select any one class");
+                        tvError.setText(getString(R.string.errInvalidBatchSelect));
                         tvError.setVisibility(View.VISIBLE);
                         return;
                     } else {
@@ -197,7 +192,7 @@ public class FragmentAddMessage extends Fragment {
                 }
                 if (category_add.equalsIgnoreCase("S")) {
                     if (selectedBatchList.isEmpty()) {
-                        tvError.setText("Please select any one class");
+                        tvError.setText(getString(R.string.errInvalidBatchSelect));
                         tvError.setVisibility(View.VISIBLE);
                         return;
                     } else {
@@ -206,7 +201,7 @@ public class FragmentAddMessage extends Fragment {
                         }
                     }
                     if (selectedStudentList.isEmpty()) {
-                        tvError.setText("Please select any one student");
+                        tvError.setText(getString(R.string.errInvalidStudentSelect));
                         tvError.setVisibility(View.VISIBLE);
                         return;
                     } else {
@@ -218,16 +213,28 @@ public class FragmentAddMessage extends Fragment {
                 String subject = etSubject.getText().toString().trim();
                 System.out.println("subject" + subject);
                 if (TextUtils.isEmpty(subject)) {
-                    etSubject.setError("Enter subject");
+                    etSubject.setError(getString(R.string.errInvalidSubject));
                     etSubject.requestFocus();
                     return;
+                }else{
+                    if(Utility.isDecimalValid(subject)){
+                        etSubject.setError(getString(R.string.errInvalidSubject));
+                        etSubject.requestFocus();
+                        return;
+                    }
                 }
                 String description = etDescription.getText().toString().trim();
                 System.out.println("description" + description);
                 if (TextUtils.isEmpty(description)) {
-                    etDescription.setError("Enter Description");
+                    etDescription.setError(getString(R.string.errInvalidDesc));
                     etDescription.requestFocus();
                     return;
+                }else{
+                    if(Utility.isDecimalValid(description)){
+                        etDescription.setError(getString(R.string.errInvalidDesc));
+                        etDescription.requestFocus();
+                        return;
+                    }
                 }
                 if(academicYearId != null && instituteId != null && loggedInUserId != null) {
                     message = new Message();
@@ -242,10 +249,10 @@ public class FragmentAddMessage extends Fragment {
                     message.setCategory(category_add);
                     message.setCreatedDate(new Date());
                     message.setCreatorId(loggedInUserId);
-                    message.setCreatorType("A");
+                    message.setCreatorType("F");
                     message.setModifiedDate(new Date());
-                    message.setModifierId("A");
-                    message.setModifierType("A");
+                    message.setModifierId("F");
+                    message.setModifierType("F");
                     message.setRecipientType("P");
 
                     addMessage();
@@ -369,6 +376,8 @@ public class FragmentAddMessage extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+                        etSubject.setText("");
+                        etDescription.setText("");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -469,9 +478,9 @@ public class FragmentAddMessage extends Fragment {
                 originalStudentList.clear();
             }
             studentCollectionRef
-                    .whereEqualTo("academicYearId", academicYearId)
-                    .whereIn("status", Arrays.asList("A", "N"))
-                    .orderBy("createdDate", Query.Direction.ASCENDING)
+                    //.whereEqualTo("academicYearId", academicYearId)
+                    .whereIn("status", Arrays.asList("A", "F"))
+                    //.orderBy("createdDate", Query.Direction.ASCENDING)
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
