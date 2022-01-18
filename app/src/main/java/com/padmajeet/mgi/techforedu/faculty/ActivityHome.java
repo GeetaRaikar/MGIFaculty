@@ -144,6 +144,10 @@ public class ActivityHome extends AppCompatActivity {
                         menuNav.findItem(R.id.nav_timetable).setChecked(true);
                         replaceFragment(new FragmentTimeTable(), getString(R.string.timeTable));
                         break;
+                    case R.id.nav_feedback:
+                        menuNav.findItem(R.id.nav_feedback).setChecked(true);
+                        replaceFragment(new FragmentFeedback(), getString(R.string.feedback));
+                        break;
                     case R.id.nav_exam_schedule:
                         menuNav.findItem(R.id.nav_exam_schedule).setChecked(true);
                         replaceFragment(new FragmentExamSeries(), getString(R.string.examSchedule));

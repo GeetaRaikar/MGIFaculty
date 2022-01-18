@@ -55,12 +55,12 @@
             android:id="@+id/nav_achievement"
             android:icon="@drawable/ic_menu_special"
             android:title="@string/achievement" />
-
-        <item
-            android:id="@+id/nav_student_fees"
-            android:icon="@drawable/ic_menu_rupee"
-            android:title="@string/studentFees" />
         -->
+        <item
+            android:id="@+id/nav_feedback"
+            android:icon="@drawable/ic_menu_feedback"
+            android:title="@string/feedback" />
+
         <item
             android:id="@+id/nav_holiday"
             android:icon="@drawable/ic_holiday"

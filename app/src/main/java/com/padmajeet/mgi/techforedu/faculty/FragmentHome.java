@@ -207,6 +207,10 @@ public class FragmentHome extends Fragment {
                             menuNav.findItem(R.id.nav_score_card).setChecked(true);
                             replaceFragment(new FragmentExamSeriesScore(), getString(R.string.scoreCard));
                             break;
+                        case 14:
+                            menuNav.findItem(R.id.nav_feedback).setChecked(true);
+                            replaceFragment(new FragmentFeedback(), getString(R.string.feedback));
+                            break;
                     }
                 }
             });
