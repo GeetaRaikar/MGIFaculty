@@ -113,7 +113,7 @@
             android:autoLink="all"
             android:linksClickable="true"
             android:text="Forgot Password ?"
-            android:textColor="@color/colorBlue" />
+            android:textColor="@color/colorBlue"/>
 
     </LinearLayout>
 

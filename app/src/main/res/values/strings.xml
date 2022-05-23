@@ -80,7 +80,7 @@
     <string name="attendance_date_cap">SELECT DATE</string>
     <string name="attendance_taken_cap">UPDATE ATTENDANCE</string>
     <string name="mark_attendance_cap">TAKE ATTENDANCE</string>
-    <string name="parent_cap">PARENT</string>
+    <string name="parent_cap">STUDENT</string>
     <string name="faculty_cap">FACULTY</string>
     <string name="not_expecting_resp_cap">NOT EXPECTING RESPONSE</string>
     <string name="expecting_resp_cap">EXPECTING RESPONSE</string>

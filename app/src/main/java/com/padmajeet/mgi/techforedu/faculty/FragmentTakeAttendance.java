@@ -473,7 +473,7 @@ public class FragmentTakeAttendance extends Fragment {
         }
         if(academicYearId != null) {
             studentListener = studentCollectionRef
-                    .whereEqualTo("academicYearId", academicYearId)
+                    //.whereEqualTo("academicYearId", academicYearId)
                     .whereEqualTo("currentBatchId", selectedBatch.getId())
                     .whereIn("status", Arrays.asList("A", "F"))
                     .orderBy("createdDate", Query.Direction.ASCENDING)

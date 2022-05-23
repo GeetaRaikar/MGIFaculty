@@ -251,7 +251,7 @@ public class FragmentEvent extends Fragment {
             eventListener = eventCollectionRef
                     .whereEqualTo("instituteId", instituteId)
                     .whereEqualTo("schoolScope", true)
-                    .whereEqualTo("recipientType", "P")
+                    .whereEqualTo("recipientType", "S")
                     .whereEqualTo("category", category_view)
                     .orderBy("fromDate", Query.Direction.DESCENDING)
                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -355,7 +355,7 @@ public class FragmentEvent extends Fragment {
             }
             eventListener = eventCollectionRef
                     .whereEqualTo("instituteId", instituteId)
-                    .whereEqualTo("recipientType", "P")
+                    .whereEqualTo("recipientType", "S")
                     .whereEqualTo("category", category_view)
                     .whereIn("batchId", Arrays.asList("", selectedBatch.getId()))
                     .orderBy("fromDate", Query.Direction.DESCENDING)

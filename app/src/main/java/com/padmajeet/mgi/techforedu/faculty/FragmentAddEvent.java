@@ -276,7 +276,7 @@ public class FragmentAddEvent extends Fragment {
             public void onClick(View view) {
                 // System.out.println("button is clicked");
                 if (!isParentClicked && !isFacultyClicked) {
-                    tvError.setText("Please select parent or teacher");
+                    tvError.setText("Please select student or faculty");
                     tvError.setVisibility(View.VISIBLE);
                     return;
                 } else {
@@ -421,7 +421,7 @@ public class FragmentAddEvent extends Fragment {
                             event.setInstituteId(instituteId);
                             event.setAcademicYearId(academicYearId);
                             event.setTypeId(selectEventType.getId());
-                            event.setRecipientType("P");
+                            event.setRecipientType("S");
                             event.setCategory(category_add);
                             event.setStaffResponses(map);
                             event.setStudentResponses(map);
@@ -450,7 +450,7 @@ public class FragmentAddEvent extends Fragment {
                                 event.setInstituteId(instituteId);
                                 event.setAcademicYearId(academicYearId);
                                 event.setTypeId(selectEventType.getId());
-                                event.setRecipientType("P");
+                                event.setRecipientType("S");
                                 event.setCategory(category_add);
                                 event.setStaffResponses(map);
                                 event.setStudentResponses(map);
@@ -548,6 +548,8 @@ public class FragmentAddEvent extends Fragment {
                             } else {
                                 spEventType.setVisibility(View.GONE);
                                 btnSave.setVisibility(View.GONE);
+                                tvError.setVisibility(View.VISIBLE);
+                                tvError.setText("There is no Event Type,Please create Event Type.");
                             }
                         }
                     })
